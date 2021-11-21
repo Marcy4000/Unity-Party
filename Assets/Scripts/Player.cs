@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public static KeyCode pauseKey = KeyCode.Return;
     public static KeyCode resetKey = KeyCode.R;
 
+    public static bool ghostTapping = false;
+
     public NoteObject leftNote;
     public NoteObject downNote;
     public NoteObject upNote;
@@ -62,7 +64,9 @@ public class Player : MonoBehaviour
             secondaryUpKeyCode = secUpArrowKey,
             secondaryRightKeyCode = secRightArrowKey,
             pauseKeyCode = pauseKey,
-            resetKeyCode = resetKey
+            resetKeyCode = resetKey,
+            ghostTappingEnabled = ghostTapping,
+            
         };
         
         PlayerPrefs.SetString("Saved Keybinds", JsonConvert.SerializeObject(savedKeybinds)); 
@@ -177,7 +181,9 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 0, "Pressed");
-                    Song.instance.NoteMiss(leftNote);
+                    if (!ghostTapping){
+                        Song.instance.NoteMiss(leftNote);
+                    }
                 }
             }
             if (Input.GetKeyDown(downArrowKey))
@@ -189,7 +195,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 1, "Pressed");
-                    Song.instance.NoteMiss(downNote);
+                    if (!ghostTapping)
+                    {
+                        Song.instance.NoteMiss(downNote);
+                    }
                 }
             }
             if (Input.GetKeyDown(upArrowKey))
@@ -201,7 +210,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 2, "Pressed");
-                    Song.instance.NoteMiss(upNote);
+                    if (!ghostTapping)
+                    {
+                        Song.instance.NoteMiss(upNote);
+                    }
                 }
             }
             if (Input.GetKeyDown(rightArrowKey))
@@ -213,7 +225,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 3, "Pressed");
-                    Song.instance.NoteMiss(rightNote);
+                    if (!ghostTapping)
+                    {
+                        Song.instance.NoteMiss(rightNote);
+                    }
                 }
             }
 

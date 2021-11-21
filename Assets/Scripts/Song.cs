@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
@@ -177,6 +177,8 @@ public class Song : MonoBehaviour
     private bool _onlineMode;
     public SubtitleDisplayer subtitleDisplayer;
     public bool usingSubtitles;
+
+    public GfAnimation gf;
 
     #endregion
 
@@ -841,6 +843,7 @@ public class Song : MonoBehaviour
         {
             source.Play();
         }
+        gf.Setup(_song.Bpm);
 
 
         /*
@@ -1036,7 +1039,7 @@ public class Song : MonoBehaviour
             }
 
             playerOneScoringText.text =
-                $"Score: {playerOneStats.currentScore}\nAccuracy: {accuracyPercent}%\nCombo: {playerOneStats.currentSickCombo} ({playerOneStats.highestSickCombo})\nMisses: {playerOneStats.missedHits}";
+                $"Score: {playerOneStats.currentScore} Accuracy: {accuracyPercent}% Combo: {playerOneStats.currentSickCombo} ({playerOneStats.highestSickCombo}) Misses: {playerOneStats.missedHits}";
         }
 
         if (Player.playAsEnemy || Player.twoPlayers || Player.demoMode)
@@ -1474,7 +1477,7 @@ public class Song : MonoBehaviour
                         {
                             source.Stop();
                         }
-
+                        gf.isReady = false;
                         
                         if(hasVoiceLoaded)
                             vocalSource.Stop();
@@ -1600,8 +1603,9 @@ public class Song : MonoBehaviour
                 player2Notes.gameObject.SetActive(false);
 
                 healthBar.SetActive(false);
+                gf.isReady = false;
 
-                
+
                 menuScreen.SetActive(false);
                 ScreenTransition.instance.StartTransition(menuScreen);
 
