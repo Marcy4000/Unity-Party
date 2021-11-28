@@ -64,9 +64,7 @@ public class Player : MonoBehaviour
             secondaryUpKeyCode = secUpArrowKey,
             secondaryRightKeyCode = secRightArrowKey,
             pauseKeyCode = pauseKey,
-            resetKeyCode = resetKey,
-            ghostTappingEnabled = ghostTapping,
-            
+            resetKeyCode = resetKey
         };
         
         PlayerPrefs.SetString("Saved Keybinds", JsonConvert.SerializeObject(savedKeybinds)); 
@@ -181,7 +179,8 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 0, "Pressed");
-                    if (!ghostTapping){
+                    if (!GlobalValues.ghostTapping)
+                    {
                         Song.instance.NoteMiss(leftNote);
                     }
                 }
@@ -195,7 +194,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 1, "Pressed");
-                    if (!ghostTapping)
+                    if (!GlobalValues.ghostTapping)
                     {
                         Song.instance.NoteMiss(downNote);
                     }
@@ -210,7 +209,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 2, "Pressed");
-                    if (!ghostTapping)
+                    if (!GlobalValues.ghostTapping)
                     {
                         Song.instance.NoteMiss(upNote);
                     }
@@ -225,7 +224,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     Song.instance.AnimateNote(1, 3, "Pressed");
-                    if (!ghostTapping)
+                    if (!GlobalValues.ghostTapping)
                     {
                         Song.instance.NoteMiss(rightNote);
                     }

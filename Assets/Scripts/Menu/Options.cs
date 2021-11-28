@@ -130,7 +130,6 @@ public class Options : MonoBehaviour
         Player.secRightArrowKey = savedKeybinds.secondaryRightKeyCode;
         Player.pauseKey = savedKeybinds.pauseKeyCode;
         Player.resetKey = savedKeybinds.resetKeyCode;
-        Player.ghostTapping = savedKeybinds.ghostTappingEnabled;
 
         primaryLeftKeybindText.text = "LEFT\n" + savedKeybinds.primaryLeftKeyCode;
         primaryDownKeybindText.text = "DOWN\n" + savedKeybinds.primaryDownKeyCode;
@@ -374,8 +373,12 @@ public class Options : MonoBehaviour
 
     public void SetGhostTapping(Toggle toggle)
     {
-        Player.ghostTapping = toggle;
-        Player.SaveKeySet();
+        GlobalValues.SetGhostTapping(toggle);
+    }
+
+    public void SetPendolum(Toggle toggle)
+    {
+        GlobalValues.pendolumEnabled = toggle.isOn;
     }
 
     public void ChangeKeybind(int key)

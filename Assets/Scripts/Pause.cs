@@ -6,6 +6,7 @@ public class Pause : MonoBehaviour
 {
 
     public GameObject pauseScreen;
+    public Pendolum pendolum;
     public bool editingVolume;
 
     public static Pause instance;
@@ -74,6 +75,8 @@ public class Pause : MonoBehaviour
         }
 
         Song.instance.vocalSource.Pause();
+        pendolum.isActive = false;
+        pendolum.shouldIncreaseHypnosys = false;
 
         pauseScreen.SetActive(true);
     }
@@ -91,6 +94,8 @@ public class Pause : MonoBehaviour
         }
 
         Song.instance.vocalSource.UnPause();
+        pendolum.isActive = true;
+        pendolum.shouldIncreaseHypnosys = true;
 
         pauseScreen.SetActive(false);
     }
@@ -99,6 +104,7 @@ public class Pause : MonoBehaviour
     {
         Song.instance.subtitleDisplayer.StopSubtitles();
         Song.instance.PlaySong(false);
+        pendolum.hypnosisLevel = 0;
         pauseScreen.SetActive(false);
     }
 
@@ -110,6 +116,9 @@ public class Pause : MonoBehaviour
         {
             source.Stop();
         }
+        pendolum.isActive = false;
+        pendolum.shouldIncreaseHypnosys = false;
+        pendolum.hypnosisLevel = 0;
 
         Song.instance.vocalSource.Stop();
     }

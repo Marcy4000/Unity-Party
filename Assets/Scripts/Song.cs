@@ -179,6 +179,7 @@ public class Song : MonoBehaviour
     public bool usingSubtitles;
 
     public GfAnimation gf;
+    public Pendolum pendolum;
 
     #endregion
 
@@ -263,6 +264,7 @@ public class Song : MonoBehaviour
          * we'll set the Player script to be on demo mode.
          */
         Player.demoMode = auto;
+        GlobalValues.inSong = true;
         
         /*
          * We'll reset any stats then update the UI based on it.
@@ -844,13 +846,13 @@ public class Song : MonoBehaviour
             source.Play();
         }
         gf.Setup(_song.Bpm);
-
+        pendolum.Setup(_song.Bpm);
 
         /*
          * Plays the vocal audio source then tells this script and other
          * attached scripts that the song fully started.
          */
-        if(hasVoiceLoaded)
+        if (hasVoiceLoaded)
             vocalSource.Play();
 
         songStarted = true;
@@ -1478,6 +1480,9 @@ public class Song : MonoBehaviour
                             source.Stop();
                         }
                         gf.isReady = false;
+                        pendolum.isActive = false;
+                        pendolum.shouldIncreaseHypnosys = false;
+                        pendolum.hypnosisLevel = 0f;
                         
                         if(hasVoiceLoaded)
                             vocalSource.Stop();
@@ -1604,6 +1609,9 @@ public class Song : MonoBehaviour
 
                 healthBar.SetActive(false);
                 gf.isReady = false;
+                pendolum.isActive = false;
+                pendolum.shouldIncreaseHypnosys = false;
+                pendolum.hypnosisLevel = 0;
 
 
                 menuScreen.SetActive(false);

@@ -14,5 +14,4 @@ public class SavedKeybinds
     public KeyCode secondaryRightKeyCode = KeyCode.RightArrow;
     public KeyCode pauseKeyCode = KeyCode.Return;
     public KeyCode resetKeyCode = KeyCode.R;
-    public bool ghostTappingEnabled = false;
 }
